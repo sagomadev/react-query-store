@@ -9,7 +9,7 @@ export const CompleteListPage = () => {
       {isLoading && <p>Cargando...</p>}
       {!isLoading && products.length === 0 && <p>No hay productos</p>}
 
-      <ProductList />
+      <ProductList products={products} />
     </div>
   );
 };
