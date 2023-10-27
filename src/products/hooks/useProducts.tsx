@@ -4,6 +4,7 @@ import { productActions } from "..";
 interface Options {
   filterKey?: string;
 }
+
 export const useProducts = ({ filterKey }: Options) => {
   const {
     isLoading,
