@@ -12,7 +12,7 @@ export const getProducts = async ({
   return data;
 };
 
-export const getProductById = async (id: string): Promise<Product> => {
+export const getProductById = async (id: number): Promise<Product> => {
   const { data } = await productsApi.get<Product>(`/products/${id}`);
   return data;
 };
