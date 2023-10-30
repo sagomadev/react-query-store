@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 
 interface Props {
   product: Product;
+  fullDescription?: boolean;
 }
 
-export const ProductCard = ({ product }: Props) => {
+export const ProductCard = ({ product, fullDescription = false }: Props) => {
   return (
     <Link to={`/product/${product.id}`}>
       <Card className="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto border border-white bg-white">
@@ -28,7 +29,10 @@ export const ProductCard = ({ product }: Props) => {
           <h3 className="font-black text-gray-800 text-xl">{product.title}</h3>
 
           <p className="md:text-lg text-gray-500 text-base">
-            {product.description.slice(0, 50)}...
+            {fullDescription
+              ? product.description
+              : product.description.slice(0, 50)}
+            ...
           </p>
 
           <p className="text-xl font-black text-gray-800">
