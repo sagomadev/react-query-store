@@ -5,6 +5,7 @@ export { ProductList } from "./components/ProductList";
 
 export { useProducts } from "./hooks/useProducts";
 export { useProduct } from "./hooks/useProduct";
+export { usePrefechProduct } from "./hooks/usePrefechProduct";
 
 export type { Product } from "./interfaces/product";
 
