@@ -117,8 +117,13 @@ export const NewProduct = () => {
             />
 
             <br />
-            <Button type="submit" className="mt-2" color="primary">
-              Crear
+            <Button
+              type="submit"
+              className="mt-2"
+              color="primary"
+              disabled={productMutation.isPending}
+            >
+              {productMutation.isPending ? "Cargando..." : "Crear"}
             </Button>
           </div>
 
