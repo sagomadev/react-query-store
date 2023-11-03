@@ -1,4 +1,8 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQueryClient,
+  QueryClient,
+} from "@tanstack/react-query";
 import { Product, productActions } from "..";
 
 export const useProductMutation = () => {
@@ -25,6 +29,10 @@ export const useProductMutation = () => {
     //   });
     // },
     onSuccess: (product, vars, ctx) => {
+      queryClient.removeQueries({
+        queryKey: ["product", ctx?.optimisticProduct.id],
+      });
+
       queryClient.setQueryData<Product[]>(
         ["products", { filterKey: product.category }],
         (old) => {
