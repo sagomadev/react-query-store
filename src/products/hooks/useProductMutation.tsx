@@ -17,18 +17,23 @@ export const useProductMutation = () => {
           return [optimisticProduct];
         }
       );
+      return { optimisticProduct };
     },
     // onSuccess: (product) => {
     //   queryClient.invalidateQueries({
     //     queryKey: ["products", { filterKey: product.category }],
     //   });
     // },
-    onSuccess: (product) => {
+    onSuccess: (product, vars, ctx) => {
       queryClient.setQueryData<Product[]>(
         ["products", { filterKey: product.category }],
         (old) => {
           if (old) {
-            return [...old, product];
+            return old.map((cacheProduct) => {
+              return cacheProduct.id === ctx?.optimisticProduct.id
+                ? product
+                : cacheProduct;
+            });
           }
           return [product];
         }
