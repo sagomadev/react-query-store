@@ -48,6 +48,17 @@ export const useProductMutation = () => {
       queryClient.removeQueries({
         queryKey: ["product", ctx?.optimisticProduct.id],
       });
+
+      queryClient.setQueryData<Product[]>(
+        ["products", { filterKey: vars.category }],
+        (old) => {
+          if (!old) return [];
+
+          return old.filter((cacheProduct) => {
+            return cacheProduct.id !== ctx?.optimisticProduct.id;
+          });
+        }
+      );
     },
   });
 
