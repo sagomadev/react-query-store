@@ -43,6 +43,12 @@ export const useProductMutation = () => {
         }
       );
     },
+
+    onError: (error, vars, ctx) => {
+      queryClient.removeQueries({
+        queryKey: ["product", ctx?.optimisticProduct.id],
+      });
+    },
   });
 
   return mutation;
